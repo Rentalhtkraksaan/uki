@@ -10,6 +10,11 @@
         body { font-family: 'Inter', sans-serif; }
         .gradient-bg { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); }
         #modalSuccess { display: none; }
+        .fade-in { animation: fadeIn 0.4s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 flex flex-col justify-center min-h-screen">
@@ -22,8 +27,14 @@
         <main class="bg-white p-8 rounded-b-3xl shadow-xl border-x border-b border-slate-100">
             <form id="orderForm" class="space-y-5">
                 <div>
-                    <label class="block text-sm font-semibold mb-2 text-slate-700">Nama Lengkap</label>
+                    <label class="block text-sm font-semibold mb-2 text-slate-700">Nama Lengkap (Orang 1)</label>
                     <input type="text" id="nama" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition" placeholder="Masukkan nama sesuai absen" required>
+                </div>
+
+                <div id="bundlingContainer" class="hidden fade-in">
+                    <label class="block text-sm font-semibold mb-2 text-indigo-600">Nama Lengkap (Orang 2 / Teman)</label>
+                    <input type="text" id="namaBundling" class="w-full px-4 py-3 rounded-xl border-2 border-indigo-100 focus:ring-2 focus:ring-indigo-500 outline-none transition shadow-sm" placeholder="Masukkan nama teman bundling">
+                    <p class="text-xs text-indigo-400 mt-1">* Pastikan teman yang diajak bundling berada di **kelas yang sama**.</p>
                 </div>
 
                 <div>
@@ -32,7 +43,6 @@
                         class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition" 
                         placeholder="Contoh: 08123456789 atau +62812..." 
                         required>
-                    <p class="text-xs text-slate-400 mt-1">* Gunakan format 0 atau +62, minimal 10 digit.</p>
                 </div>
 
                 <div>
@@ -72,17 +82,17 @@
 
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
                     <label class="block text-sm font-semibold mb-3 text-slate-700">Pilih Paket:</label>
-                    <div class="grid grid-cols-1 gap-3">
+                    <div class="grid grid-cols-1 gap-3 mb-3">
                         <label class="flex items-center p-3 bg-white rounded-lg border hover:border-indigo-500 cursor-pointer transition">
-                            <input type="radio" name="tipeFoto" value="ID Card Saja (7k)" checked class="w-4 h-4 text-indigo-600">
+                            <input type="radio" name="tipeFoto" value="tipe 1" checked class="w-4 h-4 text-indigo-600">
                             <span class="ml-3 text-sm font-medium">ID Card Saja (Rp 7.000)</span>
                         </label>
                         <label class="flex items-center p-3 bg-white rounded-lg border hover:border-indigo-500 cursor-pointer transition">
-                            <input type="radio" name="tipeFoto" value="1 Full Set (12k)" class="w-4 h-4 text-indigo-600">
+                            <input type="radio" name="tipeFoto" value="tipe 2" class="w-4 h-4 text-indigo-600">
                             <span class="ml-3 text-sm font-medium">1 Full Set (Rp 12.000)</span>
                         </label>
                         <label class="flex items-center p-3 bg-indigo-50 border-indigo-200 rounded-lg border hover:border-indigo-500 cursor-pointer transition">
-                            <input type="radio" name="tipeFoto" value="Bundling 2 Set (22)" class="w-4 h-4 text-indigo-600">
+                            <input type="radio" name="tipeFoto" value="Bundling 2 Set (22k)" class="w-4 h-4 text-indigo-600">
                             <span class="ml-3 text-sm font-bold text-indigo-700 italic">🔥 Bundling 2 Full Set (Rp 22.000)</span>
                         </label>
                         <label class="flex items-center p-3 bg-indigo-50 border-indigo-200 rounded-lg border hover:border-indigo-500 cursor-pointer transition">
@@ -94,6 +104,15 @@
                             <span class="ml-3 text-sm font-bold text-indigo-700 italic">🔥 Bundling 2 ID (Rp 12.000)</span>
                         </label>
                     </div>
+                    
+                    <div class="bg-amber-100 border-l-4 border-amber-500 p-3 flex gap-2 items-start">
+                        <svg class="h-5 w-5 text-amber-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p class="text-xs text-amber-800 leading-tight">
+                            <strong>INFO BUNDLING:</strong> Paket bundling hanya berlaku untuk teman dalam <strong>satu kelas yang sama</strong> agar pengiriman foto ke Drive tidak tertukar.
+                        </p>
+                    </div>
                 </div>
 
                 <button type="submit" id="btnKirim" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2">
@@ -103,49 +122,29 @@
         </main>
     </div>
 
-   <div id="modalSuccess" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-3xl max-w-md w-full p-8 text-center shadow-2xl border border-slate-100 transform transition-all">
-        <div class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-        </div>
-
-        <h2 class="text-2xl font-bold text-slate-800 mb-2">Data Terkirim!</h2>
-        <p class="text-slate-600 mb-6 leading-relaxed">
-            Halo <span id="displayNama" class="font-bold text-slate-900"></span>, silakan upload foto kamu ke Drive kelas <span id="displayKelas" class="font-bold text-indigo-600"></span>.
-        </p>
-
-        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-8 text-left rounded-r-xl">
-            <div class="flex">
-                <div class="flex-shrink-0">
-                    <svg class="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <div class="ml-3">
-                    <p class="text-sm text-amber-800 font-semibold uppercase tracking-wider">Penting!</p>
-                    <p class="text-sm text-amber-700 mt-1">
-                        Ubah nama file foto kamu menjadi:<br>
-                        <span class="font-mono font-bold text-amber-900 bg-amber-200/50 px-1 rounded" id="formatNama">Nama_Lengkap</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <a id="linkDriveBtn" href="#" target="_blank" class="group relative flex items-center justify-center w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl mb-4 transition-all shadow-lg shadow-indigo-200 overflow-hidden">
-            <span class="relative z-10 flex items-center gap-2">
-                UPLOAD KE GOOGLE DRIVE
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+    <div id="modalSuccess" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 text-center shadow-2xl border border-slate-100 transform transition-all">
+            <div class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-            </span>
-        </a>
-        <button onclick="window.location.reload()" class="text-slate-400 text-sm font-medium hover:text-slate-600 transition">
-            Isi ulang form
-        </button>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">Data Terkirim!</h2>
+            <p class="text-slate-600 mb-6 leading-relaxed">
+                Halo <span id="displayNama" class="font-bold text-slate-900"></span>, silakan upload foto kalian ke Drive kelas <span id="displayKelas" class="font-bold text-indigo-600"></span>.
+            </p>
+
+            <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-8 text-left rounded-r-xl">
+                <p class="text-sm text-amber-800 font-semibold uppercase tracking-wider italic">Format Nama File Foto:</p>
+                <p class="text-sm text-amber-900 mt-2 font-mono bg-amber-200/50 p-2 rounded break-all" id="formatNama">Nama_Lengkap</p>
+            </div>
+
+            <a id="linkDriveBtn" href="#" target="_blank" class="flex items-center justify-center w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl mb-4 transition-all shadow-lg">
+                UPLOAD KE GOOGLE DRIVE
+            </a>
+            <button onclick="window.location.reload()" class="text-slate-400 text-sm font-medium">Isi ulang form</button>
+        </div>
     </div>
-</div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -161,6 +160,23 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+
+        const bundlingContainer = document.getElementById('bundlingContainer');
+        const inputNamaBundling = document.getElementById('namaBundling');
+        const radioInputs = document.querySelectorAll('input[name="tipeFoto"]');
+
+        radioInputs.forEach(input => {
+            input.addEventListener('change', (e) => {
+                if (e.target.value.includes('Bundling')) {
+                    bundlingContainer.classList.remove('hidden');
+                    inputNamaBundling.setAttribute('required', 'true');
+                } else {
+                    bundlingContainer.classList.add('hidden');
+                    inputNamaBundling.removeAttribute('required');
+                    inputNamaBundling.value = "";
+                }
+            });
+        });
 
         const databaseLinkDrive = {
             "X TSM 1": "https://drive.google.com/drive/folders/1Kmw9jtCBk8FK1e_Ypk3uekVLnWKWRy2C?usp=drive_link",
@@ -184,52 +200,40 @@
         document.getElementById('orderForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const btn = document.getElementById('btnKirim');
-            const nama = document.getElementById('nama').value;
+            const namaUtama = document.getElementById('nama').value;
+            const namaTeman = inputNamaBundling.value;
             const noHp = document.getElementById('noHp').value;
             const kelas = document.getElementById('kelas').value;
             const tipeFoto = document.querySelector('input[name="tipeFoto"]:checked').value;
 
-            // --- VALIDASI NOMOR WHATSAPP ---
-            const startsWithValid = noHp.startsWith('0') || noHp.startsWith('+62');
-            const onlyDigits = /^(\+62|0)[0-9]+$/.test(noHp);
-            const isMinLength = noHp.length >= 10;
-
-            if (!startsWithValid || !onlyDigits || !isMinLength) {
-                alert("Format Nomor WhatsApp Tidak Valid!\n\n1. Harus diawali 0 atau +62\n2. Hanya berisi angka\n3. Minimal 10 angka");
+            // Validasi WhatsApp sederhana
+            if (noHp.length < 10) {
+                alert("Nomor HP tidak valid!");
                 return;
             }
-            // -------------------------------
 
             btn.disabled = true;
             btn.innerHTML = "Sedang Mengirim...";
 
             const ordersRef = ref(db, 'orders');
-            const newOrderRef = push(ordersRef);
+            const namaLengkapDatabase = namaTeman ? `${namaUtama} & ${namaTeman}` : namaUtama;
 
-            set(newOrderRef, {
-                nama: nama,
+            set(push(ordersRef), {
+                nama: namaLengkapDatabase,
                 no_hp: noHp,
                 kelas: kelas,
                 pilihan_foto: tipeFoto,
-                waktu: new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })
+                waktu: new Date().toLocaleString('id-ID')
             }).then(() => {
-                const linkTujuan = databaseLinkDrive[kelas] || "https://drive.google.com";
-                document.getElementById('displayNama').innerText = nama;
+                document.getElementById('displayNama').innerText = namaUtama;
                 document.getElementById('displayKelas').innerText = kelas;
                 
-                // Format penamaan file otomatis berdasarkan pilihan
-                let formatNamaFile = nama.replace(/\s+/g, '_');
-                if(tipeFoto.includes("Bundling")) {
-                    formatNamaFile += "_PAKET_BUNDLING";
-                }
-
-                document.getElementById('formatNama').innerText = formatNamaFile;
-                document.getElementById('linkDriveBtn').href = linkTujuan;
+                let formatFile = namaUtama.replace(/\s+/g, '_');
+                if(namaTeman) formatFile += `_DAN_${namaTeman.replace(/\s+/g, '_')}`;
+                
+                document.getElementById('formatNama').innerText = formatFile;
+                document.getElementById('linkDriveBtn').href = databaseLinkDrive[kelas] || "https://drive.google.com";
                 document.getElementById('modalSuccess').style.display = 'flex';
-            }).catch((err) => {
-                alert("Terjadi kesalahan: " + err.message);
-                btn.disabled = false;
-                btn.innerHTML = "KIRIM DATA & DAPATKAN LINK";
             });
         });
     </script>
