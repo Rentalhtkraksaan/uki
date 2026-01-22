@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order ID Card - Professional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); }
+        /* Memastikan body memenuhi seluruh tinggi layar */
+        html, body { height: 100%; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 flex flex-col justify-center min-h-screen">
+
+    <div class="w-full max-w-xl mx-auto py-8 px-4">
+        
+        <header class="gradient-bg text-white py-10 px-4 text-center rounded-t-3xl shadow-lg">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">Pemesanan ID Card</h1>
+            <p class="opacity-90">Silakan isi form di bawah untuk mendapatkan link upload foto.</p>
+        </header>
+
+        <main class="bg-white p-8 rounded-b-3xl shadow-xl border-x border-b border-slate-100">
+            <form id="orderForm" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-semibold mb-2 text-slate-700">Nama Lengkap</label>
+                    <input type="text" id="nama" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition" placeholder="Masukkan nama sesuai absen" required>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold mb-2 text-slate-700">Pilih Kelas</label>
+                    <select id="kelas" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none bg-white transition" required>
+                        <option value="" disabled selected>-- Pilih Kelas --</option>
+                        <optgroup label="TSM">
+                            <option value="X TSM 1">X TSM 1</option>
+                            <option value="X TSM 2">X TSM 2</option>
+                            <option value="X TSM 3">X TSM 3</option>
+                        </optgroup>
+                        <optgroup label="TKR">
+                            <option value="X TKR 1">X TKR 1</option>
+                            <option value="X TKR 2">X TKR 2</option>
+                            <option value="X TKR 3">X TKR 3</option> 
+                        </optgroup>
+                        <optgroup label="DPIB">
+                            <option value="X DPIB 1">X DPIB 1</option>
+                            <option value="X DPIB 2">X DPIB 2</option>
+                        </optgroup>
+                        <optgroup label="TEI">
+                            <option value="X TEI 1">X TEI 1</option>
+                            <option value="X TEI 2">X TEI 2</option>
+                            <option value="X TEI 3">X TEI 3</option>
+                            <option value="X TEI 4">X TEI 4</option>
+                        </optgroup>
+                        <optgroup label="RPL">
+                            <option value="X RPL 1">X RPL 1</option>
+                            <option value="X RPL 2">X RPL 2</option>
+                            <option value="X RPL 3">X RPL 3</option>
+                        </optgroup>
+                        <optgroup label="TPTL">
+                            <option value="X TPTL">X TPTL</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                    <label class="block text-sm font-semibold mb-3 text-slate-700">Pilih Tipe Order:</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex items-center justify-center cursor-pointer bg-white px-4 py-3 rounded-lg border hover:border-indigo-500 transition">
+                            <input type="radio" name="tipeFoto" value="Tipe 1" checked class="w-4 h-4 text-indigo-600">
+                            <span class="ml-2 text-sm font-medium">Tipe 1 (7k)</span>
+                        </label>
+                        <label class="flex items-center justify-center cursor-pointer bg-white px-4 py-3 rounded-lg border hover:border-indigo-500 transition">
+                            <input type="radio" name="tipeFoto" value="Tipe 2" class="w-4 h-4 text-indigo-600">
+                            <span class="ml-2 text-sm font-medium">Tipe 2 (12k)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" id="btnKirim" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2">
+                    KIRIM DATA & CHAT WA
+                </button>
+            </form>
+        </main>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCP45uq14jZysxMNf03DwtJlmjEMZXavY0",
+            authDomain: "ukib-b4675.firebaseapp.com",
+            databaseURL: "https://ukib-b4675-default-rtdb.firebaseio.com",
+            projectId: "ukib-b4675",
+            appId: "1:221524523430:web:2f4fd0c54cfefa5fb1f767"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        document.getElementById('orderForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btnKirim');
+            const nama = document.getElementById('nama').value;
+            const kelas = document.getElementById('kelas').value;
+            const tipeFoto = document.querySelector('input[name="tipeFoto"]:checked').value;
+
+            btn.disabled = true;
+            btn.innerHTML = "Sedang Memproses...";
+
+            const ordersRef = ref(db, 'orders');
+            const newOrderRef = push(ordersRef);
+            
+            set(newOrderRef, {
+                nama: nama,
+                kelas: kelas,
+                pilihan_foto: tipeFoto,
+                waktu: new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })
+            }).then(() => {
+                const pesan = `Halo Uki!\nSaya ingin order ID Card\n\nNama: *${nama}*\nKelas: *${kelas}*\nFoto: *${tipeFoto}* \n\nTolong berikan Link G-drive agar saya bisa upload file nya`;
+                window.location.href = `https://api.whatsapp.com/send?phone=6285176871609&text=${encodeURIComponent(pesan)}`;
+            }).catch((err) => {
+                alert("Terjadi kesalahan: " + err.message);
+                btn.disabled = false;
+                btn.innerHTML = "KIRIM DATA & CHAT WA";
+            });
+        });
+    </script>
+</body>
+</html>
