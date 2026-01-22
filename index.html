@@ -3,218 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order ID Card - Professional</title>
+    <title>E-Commerce Professional</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); }
-        #modalSuccess { display: none; }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc;-webkit-tap-highlight-color: transparent; }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 flex flex-col justify-center min-h-screen">
+<body class="text-slate-800">
 
-    <div class="w-full max-w-xl mx-auto py-8 px-4">
-        <header class="gradient-bg text-white py-10 px-4 text-center rounded-t-3xl shadow-lg">
-            <h1 class="text-3xl md:text-4xl font-bold mb-2">Pemesanan ID Card</h1>
-            <p class="opacity-90">Silakan isi form di bawah untuk mendapatkan link upload foto.</p>
-        </header>
+    <header class="gradient-bg text-white py-12 md:py-20 px-6 text-center">
+        <h1 class="text-3xl md:text-5xl font-bold mb-4">Produk Eksklusif Kami</h1>
+        <p class="text-sm md:text-lg opacity-90 max-w-2xl mx-auto">Kualitas terbaik dengan pelayanan profesional.</p>
+    </header>
 
-        <main class="bg-white p-8 rounded-b-3xl shadow-xl border-x border-b border-slate-100">
-            <form id="orderForm" class="space-y-5">
-                <div>
-                    <label class="block text-sm font-semibold mb-2 text-slate-700">Nama Lengkap</label>
-                    <input type="text" id="nama" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition" placeholder="Masukkan nama sesuai absen" required>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-semibold mb-2 text-slate-700">Nomor WhatsApp</label>
-                    <input type="tel" id="noHp" 
-                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none transition" 
-                        placeholder="Contoh: 08123456789 atau +62812..." 
-                        required>
-                    <p class="text-xs text-slate-400 mt-1">* Gunakan format 0 atau +62, minimal 10 digit.</p>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-semibold mb-2 text-slate-700">Pilih Kelas</label>
-                    <select id="kelas" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none bg-white transition" required>
-                        <option value="" disabled selected>-- Pilih Kelas --</option>
-                        <optgroup label="TSM">
-                            <option value="X TSM 1">X TSM 1</option>
-                            <option value="X TSM 2">X TSM 2</option>
-                            <option value="X TSM 3">X TSM 3</option>
-                        </optgroup>
-                        <optgroup label="TKR">
-                            <option value="X TKR 1">X TKR 1</option>
-                            <option value="X TKR 2">X TKR 2</option>
-                            <option value="X TKR 3">X TKR 3</option> 
-                        </optgroup>
-                        <optgroup label="DPIB">
-                            <option value="X DPIB 1">X DPIB 1</option>
-                            <option value="X DPIB 2">X DPIB 2</option>
-                        </optgroup>
-                        <optgroup label="TEI">
-                            <option value="X TEI 1">X TEI 1</option>
-                            <option value="X TEI 2">X TEI 2</option>
-                            <option value="X TEI 3">X TEI 3</option>
-                            <option value="X TEI 4">X TEI 4</option>
-                        </optgroup>
-                        <optgroup label="RPL">
-                            <option value="X RPL 1">X RPL 1</option>
-                            <option value="X RPL 2">X RPL 2</option>
-                            <option value="X RPL 3">X RPL 3</option>
-                        </optgroup>
-                        <optgroup label="TPTL">
-                            <option value="X TPTL">X TPTL</option>
-                        </optgroup>
-                    </select>
-                </div>
-
-                <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <label class="block text-sm font-semibold mb-3 text-slate-700">Pilih Tipe Order:</label>
-                    <div class="grid grid-cols-2 gap-3">
-                        <label class="flex items-center justify-center cursor-pointer bg-white px-4 py-3 rounded-lg border hover:border-indigo-500 transition">
-                            <input type="radio" name="tipeFoto" value="Tipe 1" checked class="w-4 h-4 text-indigo-600">
-                            <span class="ml-2 text-sm font-medium">Tipe 1 (7k)</span>
-                        </label>
-                        <label class="flex items-center justify-center cursor-pointer bg-white px-4 py-3 rounded-lg border hover:border-indigo-500 transition">
-                            <input type="radio" name="tipeFoto" value="Tipe 2" class="w-4 h-4 text-indigo-600">
-                            <span class="ml-2 text-sm font-medium">Tipe 2 (12k)</span>
-                        </label>
+    <main class="container mx-auto px-4 -mt-10 mb-20">
+        <div class="flex flex-col lg:flex-row gap-8 items-start">
+            
+            <div class="w-full lg:w-2/3 space-y-6 md:space-y-8 order-1">
+                <div class="bg-white p-3 rounded-3xl shadow-xl border border-slate-100">
+                    <div class="aspect-square w-full overflow-hidden rounded-2xl bg-slate-100">
+                        <img src="foto2.jpg" alt="Product" class="w-full h-full object-cover transition-transform hover:scale-105 duration-500">
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-xs font-semibold uppercase">Best Seller</span>
+                        <h2 class="text-2xl md:text-3xl font-bold mt-4">Complete Identity Set</h2>
+                        <p class="text-slate-600 mt-2 text-sm md:text-base">Perpaduan Card Holder elegan dan Yoyo retractable.</p>
+                        <div class="mt-6 flex items-center justify-between">
+                            <span class="text-2xl md:text-3xl font-bold text-indigo-600">Rp 12.000</span>
+                            <div class="flex text-yellow-400 text-sm md:text-lg">★★★★★(125+ Review)</div>
+                        </div>
                     </div>
                 </div>
 
-                <button type="submit" id="btnKirim" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2">
-                    KIRIM DATA & DAPATKAN LINK
-                </button>
-            </form>
-        </main>
-    </div>
-
-   <div id="modalSuccess" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-3xl max-w-md w-full p-8 text-center shadow-2xl border border-slate-100 transform transition-all">
-        <div class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-        </div>
-
-        <h2 class="text-2xl font-bold text-slate-800 mb-2">Data Terkirim!</h2>
-        <p class="text-slate-600 mb-6 leading-relaxed">
-            Halo <span id="displayNama" class="font-bold text-slate-900"></span>, silakan upload foto kamu ke Drive kelas <span id="displayKelas" class="font-bold text-indigo-600"></span>.
-        </p>
-
-        <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-8 text-left rounded-r-xl">
-            <div class="flex">
-                <div class="flex-shrink-0">
-                    <svg class="h-5 w-5 text-amber-400" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <div class="ml-3">
-                    <p class="text-sm text-amber-800 font-semibold uppercase tracking-wider">Penting!</p>
-                    <p class="text-sm text-amber-700 mt-1">
-                        Ubah nama file foto kamu menjadi:<br>
-                        <span class="font-mono font-bold text-amber-900 bg-amber-200/50 px-1 rounded" id="formatNama">Nama_Lengkap</span>
-                    </p>
+                <div class="bg-white p-3 rounded-3xl shadow-xl border border-slate-100">
+                    <div class="aspect-square w-full overflow-hidden rounded-2xl bg-slate-100">
+                        <img src="foto1.jpg" alt="Product" class="w-full h-full object-cover transition-transform hover:scale-105 duration-500">
+                    </div>
+                    <div class="p-4 md:p-6">
+                        <span class="bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full text-xs font-semibold uppercase">Premium</span>
+                        <h2 class="text-2xl md:text-3xl font-bold mt-4">High-Quality ID Identity</h2>
+                        <p class="text-slate-600 mt-2 text-sm md:text-base">Dibuat dengan standar industri yang tahan lama dan anti gores.</p>
+                        <div class="mt-6 flex items-center justify-between">
+                            <span class="text-2xl md:text-3xl font-bold text-indigo-600">Rp 7.000</span>
+                            <div class="flex text-yellow-400 text-sm md:text-lg">★★★★☆(85+ reviews)</div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <div class="w-full lg:w-1/3 order-2 lg:sticky lg:top-10">
+                <div class="bg-white p-6 md:p-8 rounded-3xl shadow-2xl border border-slate-100 text-center">
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 text-slate-800 border-b pb-4">Siap Memesan?</h3>
+                    <p class="text-slate-600 mb-8 text-sm md:text-base">
+                        Klik tombol di bawah untuk mengisi data diri di halaman pemesanan.
+                    </p>
+                    
+                    <a href="order.html" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 md:py-5 rounded-2xl shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-3 text-lg md:text-xl">
+                        ORDER SEKARANG
+                        
+                    </a>
+                    
+                    <p class="text-slate-400 text-[10px] mt-6 uppercase tracking-widest font-bold">Proses Instan & Terintegrasi WA</p>
+                </div>
+            </div>
+
         </div>
-
-        <a id="linkDriveBtn" href="#" target="_blank" class="group relative flex items-center justify-center w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-2xl mb-4 transition-all shadow-lg shadow-indigo-200 overflow-hidden">
-            <span class="relative z-10 flex items-center gap-2">
-                UPLOAD KE GOOGLE DRIVE
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-            </span>
-        </a>
-
-        <button onclick="window.location.reload()" class="text-slate-400 text-sm font-medium hover:text-slate-600 transition">
-            Isi ulang form
-        </button>
-    </div>
-</div>
-
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyCP45uq14jZysxMNf03DwtJlmjEMZXavY0",
-            authDomain: "ukib-b4675.firebaseapp.com",
-            databaseURL: "https://ukib-b4675-default-rtdb.firebaseio.com",
-            projectId: "ukib-b4675",
-            appId: "1:221524523430:web:2f4fd0c54cfefa5fb1f767"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getDatabase(app);
-
-        const databaseLinkDrive = {
-            "X TSM 1": "https://drive.google.com/drive/folders/1Kmw9jtCBk8FK1e_Ypk3uekVLnWKWRy2C?usp=drive_link",
-            "X TSM 2": "https://drive.google.com/drive/folders/1hltKg5XH92mskjeeVrW6Cy98A1A8M2nT?usp=drive_link",
-            "X TSM 3": "https://drive.google.com/drive/folders/1OSn47Db_05rJoGiDO7wqGvQbMBhlRTwc?usp=drive_link",
-            "X TKR 1": "https://drive.google.com/drive/folders/1RbaFr3YBU5zuSUSPUuxY58sOKO_FGKka?usp=drive_link",
-            "X TKR 2": "https://drive.google.com/drive/folders/17eB6pebDDYerUdjKYiLqHLNPKy_Gq5B6?usp=drive_link",
-            "X TKR 3": "https://drive.google.com/drive/folders/1owECYmHBt2GTwpUyNNi2fXxV3H9fyXfe?usp=drive_link",
-            "X DPIB 1": "https://drive.google.com/drive/folders/1WXtMXVJf90Cbsldx0CO24U5ltWtqlv9P?usp=drive_link",
-            "X DPIB 2": "https://drive.google.com/drive/folders/1M9uLkEqFXM_ojFgBrDN0Hw9q-7Dvusz6?usp=drive_link",
-            "X TEI 1": "https://drive.google.com/drive/folders/18hWzCwSql_s9hP-MYxqzx9AtlCuIe_tS?usp=drive_link",
-            "X TEI 2": "https://drive.google.com/drive/folders/1NEKUYAF3Rhx96GovmQa8_QCX2-ssgSLD?usp=drive_link",
-            "X TEI 3": "https://drive.google.com/drive/folders/1c6vcKsIx-PqFdNEYj_NyUKh8A582QNKG?usp=drive_link",
-            "X TEI 4": "https://drive.google.com/drive/folders/1fJibpT3VkcRXFprVIVe56qj9KkzjoD2F?usp=drive_link",
-            "X RPL 1": "https://drive.google.com/drive/folders/1MShb0VfYk44jnWqPgsnH0tay4P_jdfaU?usp=drive_link",
-            "X RPL 2": "https://drive.google.com/drive/folders/1mZWRi7Rg4w2oNzeUzRHk7XS2VXxyxy00?usp=drive_link",
-            "X RPL 3": "https://drive.google.com/drive/folders/1BIedDbUrJig9ULtFi9xlJ-P7DPyg_CJs?usp=drive_link",
-            "X TPTL": "https://drive.google.com/drive/folders/1wk8b0YJh1-f_2U8Q_ZK1dHEkOgNeqiEX?usp=drive_link"
-        };
-
-        document.getElementById('orderForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('btnKirim');
-            const nama = document.getElementById('nama').value;
-            const noHp = document.getElementById('noHp').value;
-            const kelas = document.getElementById('kelas').value;
-            const tipeFoto = document.querySelector('input[name="tipeFoto"]:checked').value;
-
-            // --- VALIDASI NOMOR WHATSAPP ---
-            const startsWithValid = noHp.startsWith('0') || noHp.startsWith('+62');
-            const onlyDigits = /^(\+62|0)[0-9]+$/.test(noHp);
-            const isMinLength = noHp.length >= 10;
-
-            if (!startsWithValid || !onlyDigits || !isMinLength) {
-                alert("Format Nomor WhatsApp Tidak Valid!\n\n1. Harus diawali 0 atau +62\n2. Hanya berisi angka\n3. Minimal 10 angka");
-                return;
-            }
-            // -------------------------------
-
-            btn.disabled = true;
-            btn.innerHTML = "Sedang Mengirim...";
-
-            const ordersRef = ref(db, 'orders');
-            const newOrderRef = push(ordersRef);
-
-            set(newOrderRef, {
-                nama: nama,
-                no_hp: noHp,
-                kelas: kelas,
-                pilihan_foto: tipeFoto,
-                waktu: new Date().toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })
-            }).then(() => {
-                const linkTujuan = databaseLinkDrive[kelas] || "https://drive.google.com";
-                document.getElementById('displayNama').innerText = nama;
-                document.getElementById('displayKelas').innerText = kelas;
-                document.getElementById('formatNama').innerText = nama.replace(/\s+/g, '_');
-                document.getElementById('linkDriveBtn').href = linkTujuan;
-                document.getElementById('modalSuccess').style.display = 'flex';
-            }).catch((err) => {
-                alert("Terjadi kesalahan: " + err.message);
-                btn.disabled = false;
-                btn.innerHTML = "KIRIM DATA & DAPATKAN LINK";
-            });
-        });
-    </script>
+    </main>
 </body>
 </html>
