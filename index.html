@@ -15,6 +15,16 @@
         .gradient-bg { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
         .bundling-card { background: linear-gradient(135deg, #fffcf0 0%, #fff7d6 100%); }
         .glass-effect { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        
+        /* Animasi untuk tombol WA */
+        .animate-pulse-green {
+            animation: pulse-green 2s infinite;
+        }
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
     </style>
 </head>
 <body class="text-slate-900">
@@ -29,9 +39,7 @@
 
     <main class="container mx-auto px-4 -mt-12 mb-20">
         <div class="flex flex-col lg:flex-row gap-8 items-start">
-            
             <div class="w-full lg:w-2/3 space-y-8 order-1">
-                
                 <div class="bundling-card p-6 md:p-8 rounded-[2rem] shadow-xl shadow-yellow-200/50 border border-yellow-300 relative overflow-hidden">
                     <div class="relative z-10">
                         <div class="flex items-center gap-3 mb-8">
@@ -119,7 +127,7 @@
                         Pesan sekarang untuk menjadi lebih keren!. Proses cepat & rapi.
                     </p>
                     
-                    <a href="order.html" class="w-full bg-slate-900 hover:bg-indigo-600 text-white font-bold py-5 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 text-lg tracking-tight uppercase">
+                    <a href="https://wa.me/6285176871609?text=Halo%20admin%2C%20saya%20mau%20order%20ID%20Card" class="w-full bg-slate-900 hover:bg-indigo-600 text-white font-bold py-5 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 text-lg tracking-tight uppercase">
                         <span>Pesan sekarang</span>
                     </a>
                     
@@ -131,7 +139,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="mt-6 flex items-center justify-center gap-4 text-slate-400 px-4">
                     <div class="flex items-center gap-1">
                         <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path></svg>
@@ -143,9 +151,16 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </main>
+
+    <a href="https://wa.me/6281252669990?text=Halo%20Admin%2C%20saya%20ingin%20tanya%20mengenai%20produk%20ID%20Card" 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 bg-green-500 rounded-full shadow-2xl transition-transform hover:scale-110 active:scale-90 animate-pulse-green">
+        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.465l.303.18c1.52.903 3.276 1.38 5.065 1.382h.001c5.454 0 9.893-4.438 9.896-9.892.002-2.646-1.027-5.131-2.898-7.003-1.871-1.871-4.358-2.9-7.002-2.902-5.454 0-9.894 4.438-9.897 9.892-.001 2.096.657 4.14 1.899 5.845l.198.273-.996 3.636 3.731-.979zm11.332-6.84c-.312-.156-1.848-.912-2.134-1.017-.286-.105-.494-.156-.703.156-.21.312-.806.105-.989.312-.183.21-.365.235-.677.079-.312-.156-1.316-.484-2.507-1.547-.927-.827-1.553-1.849-1.735-2.16-.183-.312-.02-.481.136-.636.141-.14.312-.365.468-.547.156-.182.209-.312.312-.52.105-.21.052-.391-.026-.547-.079-.156-.703-1.693-.963-2.318-.253-.61-.51-.527-.703-.537-.183-.01-.39-.011-.599-.011-.21 0-.547.079-.833.391-.286.312-1.093 1.067-1.093 2.604 0 1.537 1.12 3.021 1.276 3.23.156.21 2.201 3.362 5.333 4.717.745.322 1.327.514 1.78.658.748.237 1.428.204 1.967.124.6-.089 1.848-.756 2.108-1.458.26-.703.26-1.303.183-1.458-.077-.157-.286-.235-.598-.391z"/>
+        </svg>
+    </a>
 
 </body>
 </html>
