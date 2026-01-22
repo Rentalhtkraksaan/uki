@@ -34,6 +34,14 @@
         <p class="text-indigo-100 text-sm md:text-xl max-w-2xl mx-auto leading-relaxed">
             Satu kartu untuk semua identitasmu. Kualitas tinggi, anti pudar, dan tersedia paket bundling hemat.
         </p>
+
+        <div class="mt-6 flex items-center justify-center gap-2 text-indigo-200/80 text-sm font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+            <span id="count">0</span> kunjungan
+        </div>
     </header>
 
     <main class="container mx-auto px-4 -mt-12 mb-20">
@@ -154,13 +162,59 @@
         </div>
     </main>
 
-    <a href="https://wa.me/6285176871609?text=Halo%20Admin%2C%20saya%20ingin%20tanya%20mengenai%20produk%20ID%20Card" 
-       target="_blank" 
-       class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 bg-green-500 rounded-full shadow-2xl transition-transform hover:scale-110 active:scale-90 animate-pulse-green">
+    <a href="https://wa.me/6285176871609?text=Halo%20Admin%2C%20saya%20ingin%20tanya%20mengenai%20produk%20ID%20Card"
+        target="_blank"
+        class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-16 h-16 bg-green-500 rounded-full shadow-2xl transition-transform hover:scale-110 active:scale-90 animate-pulse-green">
         <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.246 2.248 3.484 5.232 3.484 8.412-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.309 1.656zm6.29-4.465l.303.18c1.52.903 3.276 1.38 5.065 1.382h.001c5.454 0 9.893-4.438 9.896-9.892.002-2.646-1.027-5.131-2.898-7.003-1.871-1.871-4.358-2.9-7.002-2.902-5.454 0-9.894 4.438-9.897 9.892-.001 2.096.657 4.14 1.899 5.845l.198.273-.996 3.636 3.731-.979zm11.332-6.84c-.312-.156-1.848-.912-2.134-1.017-.286-.105-.494-.156-.703.156-.21.312-.806.105-.989.312-.183.21-.365.235-.677.079-.312-.156-1.316-.484-2.507-1.547-.927-.827-1.553-1.849-1.735-2.16-.183-.312-.02-.481.136-.636.141-.14.312-.365.468-.547.156-.182.209-.312.312-.52.105-.21.052-.391-.026-.547-.079-.156-.703-1.693-.963-2.318-.253-.61-.51-.527-.703-.537-.183-.01-.39-.011-.599-.011-.21 0-.547.079-.833.391-.286.312-1.093 1.067-1.093 2.604 0 1.537 1.12 3.021 1.276 3.23.156.21 2.201 3.362 5.333 4.717.745.322 1.327.514 1.78.658.748.237 1.428.204 1.967.124.6-.089 1.848-.756 2.108-1.458.26-.703.26-1.303.183-1.458-.077-.157-.286-.235-.598-.391z"/>
         </svg>
     </a>
 
+   <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+
+<script>
+    // 1. Menggunakan Config dari Database yang kamu kasih
+    const firebaseConfig = {
+        apiKey: "AIzaSyCP45uq14jZysxMNf03DwtJlmjEMZXavY0",
+        authDomain: "ukib-b4675.firebaseapp.com",
+        databaseURL: "https://ukib-b4675-default-rtdb.firebaseio.com",
+        projectId: "ukib-b4675",
+        appId: "1:221524523430:web:2f4fd0c54cfefa5fb1f767"
+    };
+
+    // 2. Inisialisasi
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const visitorRef = db.ref('visitor_count');
+
+    // 3. Fungsi Tambah Visitor (Setiap Refresh Nambah)
+    function updateVisitor() {
+        // Transaction untuk memastikan angka nambah dengan benar meski barengan
+        visitorRef.transaction((currentValue) => {
+            return (currentValue || 0) + 1;
+        }, (error, committed, snapshot) => {
+            if (error) {
+                console.error("Gagal update database. Cek Rules Firebase kamu!", error);
+            }
+        });
+    }
+
+    // 4. Pantau Angka Realtime
+    visitorRef.on('value', (snapshot) => {
+        const count = snapshot.val() || 0;
+        // Update angka di HTML (id="count")
+        const element = document.getElementById('count');
+        if (element) {
+            element.innerText = count.toLocaleString('id-ID');
+        }
+    });
+
+    // Jalankan fungsi tambah saat halaman dibuka/refresh
+    updateVisitor();
+</script>
 </body>
 </html>
