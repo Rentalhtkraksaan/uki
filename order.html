@@ -13,11 +13,10 @@
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 flex flex-col justify-center min-h-screen">
-
     <div class="w-full max-w-xl mx-auto py-8 px-4">
         <header class="gradient-bg text-white py-10 px-4 text-center rounded-t-3xl shadow-lg">
             <h1 class="text-3xl md:text-4xl font-bold mb-2">Pemesanan ID Card</h1>
-            <p class="opacity-90">Silakan isi form di bawah untuk mendapatkan link upload foto.</p>
+            <p class="opacity-90">Pilih paket bundling untuk harga lebih hemat!</p>
         </header>
 
         <main class="bg-white p-8 rounded-b-3xl shadow-xl border-x border-b border-slate-100">
@@ -72,15 +71,27 @@
                 </div>
 
                 <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                    <label class="block text-sm font-semibold mb-3 text-slate-700">Pilih Tipe Order:</label>
-                    <div class="grid grid-cols-2 gap-3">
-                        <label class="flex items-center justify-center cursor-pointer bg-white px-4 py-3 rounded-lg border hover:border-indigo-500 transition">
-                            <input type="radio" name="tipeFoto" value="Tipe 1" checked class="w-4 h-4 text-indigo-600">
-                            <span class="ml-2 text-sm font-medium">Tipe 1 (7k)</span>
+                    <label class="block text-sm font-semibold mb-3 text-slate-700">Pilih Paket:</label>
+                    <div class="grid grid-cols-1 gap-3">
+                        <label class="flex items-center p-3 bg-white rounded-lg border hover:border-indigo-500 cursor-pointer transition">
+                            <input type="radio" name="tipeFoto" value="ID Card Saja (7k)" checked class="w-4 h-4 text-indigo-600">
+                            <span class="ml-3 text-sm font-medium">ID Card Saja (Rp 7.000)</span>
                         </label>
-                        <label class="flex items-center justify-center cursor-pointer bg-white px-4 py-3 rounded-lg border hover:border-indigo-500 transition">
-                            <input type="radio" name="tipeFoto" value="Tipe 2" class="w-4 h-4 text-indigo-600">
-                            <span class="ml-2 text-sm font-medium">Tipe 2 (12k)</span>
+                        <label class="flex items-center p-3 bg-white rounded-lg border hover:border-indigo-500 cursor-pointer transition">
+                            <input type="radio" name="tipeFoto" value="1 Full Set (12k)" class="w-4 h-4 text-indigo-600">
+                            <span class="ml-3 text-sm font-medium">1 Full Set (Rp 12.000)</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-indigo-50 border-indigo-200 rounded-lg border hover:border-indigo-500 cursor-pointer transition">
+                            <input type="radio" name="tipeFoto" value="Bundling 2 Set (22)" class="w-4 h-4 text-indigo-600">
+                            <span class="ml-3 text-sm font-bold text-indigo-700 italic">🔥 Bundling 2 Full Set (Rp 22.000)</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-indigo-50 border-indigo-200 rounded-lg border hover:border-indigo-500 cursor-pointer transition">
+                            <input type="radio" name="tipeFoto" value="Bundling Mix (17k)" class="w-4 h-4 text-indigo-600">
+                            <span class="ml-3 text-sm font-bold text-indigo-700 italic">🔥 Bundling 1 Set + 1 ID (Rp 17.000)</span>
+                        </label>
+                        <label class="flex items-center p-3 bg-indigo-50 border-indigo-200 rounded-lg border hover:border-indigo-500 cursor-pointer transition">
+                            <input type="radio" name="tipeFoto" value="Bundling Mix (12k)" class="w-4 h-4 text-indigo-600">
+                            <span class="ml-3 text-sm font-bold text-indigo-700 italic">🔥 Bundling 2 ID (Rp 12.000)</span>
                         </label>
                     </div>
                 </div>
@@ -130,7 +141,6 @@
                 </svg>
             </span>
         </a>
-
         <button onclick="window.location.reload()" class="text-slate-400 text-sm font-medium hover:text-slate-600 transition">
             Isi ulang form
         </button>
@@ -206,7 +216,14 @@
                 const linkTujuan = databaseLinkDrive[kelas] || "https://drive.google.com";
                 document.getElementById('displayNama').innerText = nama;
                 document.getElementById('displayKelas').innerText = kelas;
-                document.getElementById('formatNama').innerText = nama.replace(/\s+/g, '_');
+                
+                // Format penamaan file otomatis berdasarkan pilihan
+                let formatNamaFile = nama.replace(/\s+/g, '_');
+                if(tipeFoto.includes("Bundling")) {
+                    formatNamaFile += "_PAKET_BUNDLING";
+                }
+
+                document.getElementById('formatNama').innerText = formatNamaFile;
                 document.getElementById('linkDriveBtn').href = linkTujuan;
                 document.getElementById('modalSuccess').style.display = 'flex';
             }).catch((err) => {
