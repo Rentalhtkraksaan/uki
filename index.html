@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Katalog ID Card & Aksesoris</title>
+    <title>Katalog ID Card & Aksesoris - Batch 2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -14,7 +14,6 @@
         }
         .gradient-bg { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
         .bundling-card { background: linear-gradient(135deg, #fffcf0 0%, #fff7d6 100%); }
-        .glass-effect { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
         
         .animate-pulse-green {
             animation: pulse-green 2s infinite;
@@ -28,49 +27,50 @@
 </head>
 <body class="text-slate-900">
 
-    <div class="fixed top-0 left-0 right-0 z-[60] bg-slate-900 text-white py-2 px-4 shadow-lg border-b border-white/10">
-        <div class="container mx-auto flex flex-col md:flex-row items-center justify-center gap-2 md:gap-6">
+    <div id="timer-banner" class="fixed top-0 left-0 right-0 z-[60] bg-slate-900 text-white py-2 px-4 shadow-lg border-b border-white/10">
+        <div class="container mx-auto flex flex-col md:flex-row items-center justify-center gap-2 md:gap-8">
             <div class="flex items-center gap-2">
                 <span class="relative flex h-3 w-3">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                 </span>
-                <p class="text-[11px] md:text-xs font-bold uppercase tracking-widest text-red-400">Batch 1 Berakhir Dalam:</p>
+                <p class="text-[10px] md:text-xs font-bold uppercase tracking-widest text-emerald-400">Batch 2 Sedang Dibuka:</p>
             </div>
             
-            <div class="flex items-center gap-3 font-mono">
-                <div class="flex flex-col items-center">
-                    <span id="days" class="text-lg md:text-xl font-black">00</span>
-                    <span class="text-[8px] uppercase -mt-1 opacity-60">Hari</span>
+            <div class="flex items-center gap-4 font-mono">
+                <div class="text-center">
+                    <span id="days" class="text-xl md:text-2xl font-black text-white">00</span>
+                    <p class="text-[7px] uppercase opacity-50 -mt-1">Hari</p>
                 </div>
-                <span class="font-bold text-indigo-400">:</span>
-                <div class="flex flex-col items-center">
-                    <span id="hours" class="text-lg md:text-xl font-black">00</span>
-                    <span class="text-[8px] uppercase -mt-1 opacity-60">Jam</span>
+                <span class="font-bold text-emerald-500 mb-2">:</span>
+                <div class="text-center">
+                    <span id="hours" class="text-xl md:text-2xl font-black text-white">00</span>
+                    <p class="text-[7px] uppercase opacity-50 -mt-1">Jam</p>
                 </div>
-                <span class="font-bold text-indigo-400">:</span>
-                <div class="flex flex-col items-center">
-                    <span id="minutes" class="text-lg md:text-xl font-black">00</span>
-                    <span class="text-[8px] uppercase -mt-1 opacity-60">Menit</span>
+                <span class="font-bold text-emerald-500 mb-2">:</span>
+                <div class="text-center">
+                    <span id="minutes" class="text-xl md:text-2xl font-black text-white">00</span>
+                    <p class="text-[7px] uppercase opacity-50 -mt-1">Menit</p>
                 </div>
-                <span class="font-bold text-indigo-400">:</span>
-                <div class="flex flex-col items-center">
-                    <span id="seconds" class="text-lg md:text-xl font-black">00</span>
-                    <span class="text-[8px] uppercase -mt-1 opacity-60">Detik</span>
+                <span class="font-bold text-emerald-500 mb-2">:</span>
+                <div class="text-center">
+                    <span id="seconds" class="text-xl md:text-2xl font-black text-white">00</span>
+                    <p class="text-[7px] uppercase opacity-50 -mt-1">Detik</p>
                 </div>
             </div>
 
-            <p class="hidden md:block text-[10px] bg-white/10 px-3 py-1 rounded-full font-medium">
-                Berakhir 24 Jan, 10:00 WIB
-            </p>
+            <div class="hidden md:block border-l border-white/20 pl-6">
+                <p class="text-[10px] text-slate-400 uppercase tracking-tighter text-left">Penutupan Batch 2</p>
+                <p id="display-deadline" class="text-xs font-bold text-emerald-300"></p>
+            </div>
         </div>
     </div>
 
-    <header class="gradient-bg text-white pt-28 pb-24 px-6 text-center">        
+    <header class="gradient-bg text-white pt-32 pb-24 px-6 text-center">        
         <span class="inline-block bg-white/20 px-4 py-1 rounded-full text-xs font-semibold mb-4 tracking-wider uppercase">Premium Printing Solution</span>        
         <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">Identity Solution</h1>        
         <p class="text-indigo-100 text-sm md:text-xl max-w-2xl mx-auto leading-relaxed">            
-            Satu kartu untuk semua identitasmu. Kualitas tinggi, anti pudar, dan tersedia paket bundling hemat.        
+            Satu kartu untuk semua identitasmu. Batch 2 resmi dibuka! Kualitas tetap premium, anti pudar.
         </p>
         <div class="mt-6 flex items-center justify-center gap-2 text-indigo-200/80 text-sm font-medium">            
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">                
@@ -87,9 +87,10 @@
                 <div class="bundling-card p-6 md:p-8 rounded-[2rem] shadow-xl shadow-yellow-200/50 border border-yellow-300 relative overflow-hidden">                    
                     <div class="relative z-10">                        
                         <div class="flex items-center gap-3 mb-8">                            
-                            <span class="bg-red-500 text-white px-3 py-1 rounded-lg text-[10px] font-black uppercase animate-bounce tracking-tighter">Hot Promo</span>                            
+                            <span class="bg-red-500 text-white px-3 py-1 rounded-lg text-[10px] font-black uppercase animate-bounce tracking-tighter">Hot Promo Batch 2</span>                            
                             <h2 class="text-2xl font-extrabold text-yellow-900 tracking-tight">Pilih Paket Lebih Untung✨</h2>                        
                         </div>
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">                            
                             <a href="order.html" class="group bg-white p-5 rounded-2xl border border-yellow-200 hover:border-indigo-400 hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer shadow-sm block">                                
                                 <h3 class="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">2 Pasang Full Set</h3>                                
@@ -100,6 +101,7 @@
                                 </div>                                
                                 <div class="mt-3 inline-block bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded-md uppercase">Klik untuk pilih</div>                            
                             </a>
+
                             <a href="order.html" class="group bg-white p-5 rounded-2xl border border-yellow-200 hover:border-indigo-400 hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer shadow-sm block">                                
                                 <h3 class="font-bold text-slate-800 group-hover:text-indigo-600 transition-colors">1 Full Set + 1 ID Card</h3>                                
                                 <p class="text-[11px] text-slate-500 mb-4 uppercase tracking-wide font-medium">Solusi 1 Holder Untuk 2 Kartu</p>                                
@@ -109,6 +111,7 @@
                                 </div>                                
                                 <div class="mt-3 inline-block bg-green-100 text-green-700 text-[10px] font-bold px-2 py-1 rounded-md uppercase">Klik untuk pilih</div>                            
                             </a>
+
                             <a href="order.html" class="bg-indigo-600 p-5 rounded-2xl md:col-span-2 flex flex-col md:flex-row justify-between items-center text-white gap-4 shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-1 transition-all cursor-pointer block">                                
                                 <div>                                    
                                     <h3 class="font-bold text-lg">Paket 2 ID Card</h3>                                    
@@ -122,6 +125,7 @@
                         </div>                    
                     </div>                
                 </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">                    
                     <div class="bg-white rounded-[2rem] shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all group">                        
                         <div class="aspect-square w-full overflow-hidden bg-slate-100 relative">                            
@@ -137,6 +141,7 @@
                             </div>                        
                         </div>                    
                     </div>
+
                     <div class="bg-white rounded-[2rem] shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all group">                        
                         <div class="aspect-square w-full overflow-hidden bg-slate-100 relative">                            
                             <img src="foto1.jpg" alt="ID Card Only" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">                            
@@ -153,20 +158,20 @@
                     </div>                
                 </div>            
             </div>
-            
-            <div class="w-full lg:w-1/3 order-2 lg:sticky lg:top-20">                
+
+            <div class="w-full lg:w-1/3 order-2 lg:sticky lg:top-24">                
                 <div class="bg-white p-8 rounded-[2rem] shadow-2xl shadow-indigo-100 border border-slate-200 text-center">                    
-                    <div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">                        
+                    <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-6">                        
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">                          
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />                        
                         </svg>                    
                     </div>                    
-                    <h3 class="text-2xl font-black mb-3 text-slate-900 tracking-tight">Siap Memesan?</h3>                    
+                    <h3 class="text-2xl font-black mb-3 text-slate-900 tracking-tight">Pesan di Batch 2</h3>                    
                     <p class="text-slate-500 mb-8 text-sm leading-relaxed">                        
-                        Pesan sekarang untuk menjadi lebih keren!. Proses cepat & rapi.                    
+                        Jangan sampai ketinggalan lagi! Pesan sekarang untuk proses lebih cepat.                    
                     </p>                                        
-                    <a href="order.html" class="w-full bg-slate-900 hover:bg-indigo-600 text-white font-bold py-5 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 text-lg tracking-tight uppercase">                        
-                        <span>Pesan sekarang</span>                    
+                    <a href="order.html" class="w-full bg-slate-900 hover:bg-emerald-600 text-white font-bold py-5 rounded-2xl shadow-xl transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-3 text-lg tracking-tight uppercase">                        
+                        <span>Pesan Sekarang</span>                    
                     </a>                                        
                     <div class="mt-8 pt-8 border-t border-slate-100">                        
                         <p class="text-slate-400 text-[10px] uppercase tracking-widest font-black mb-4">Metode Pembayaran</p>                        
@@ -189,7 +194,12 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
     <script>
-        // 1. Firebase Config
+        // --- SETTING BATCH 2 DI SINI ---
+        const TANGGAL_TUTUP_B2 = "January 31, 2026"; // Contoh: Tutup tgl 31 Jan
+        const JAM_TUTUP_B2 = "12:00:00";
+        // -------------------------------
+
+        // Firebase Initialization
         const firebaseConfig = {
             apiKey: "AIzaSyCP45uq14jZysxMNf03DwtJlmjEMZXavY0",
             authDomain: "ukib-b4675.firebaseapp.com",
@@ -215,40 +225,38 @@
 
         updateVisitor();
 
-        // 2. COUNTDOWN LOGIC
-        function startCountdown() {
-            // Target: 24 Januari 2026 jam 10:00 (Sesuaikan tahun jika perlu, saya set 2026 sesuai instruksi sistem)
-            const targetDate = new Date("January 24, 2026 10:00:00").getTime();
+        // COUNTDOWN LOGIC BATCH 2
+        function initCountdown() {
+            const displayDeadline = document.getElementById("display-deadline");
+            displayDeadline.innerText = `${TANGGAL_TUTUP_B2}  ${JAM_TUTUP_B2.substring(0,5)}`;
+
+            const targetDate = new Date(`${TANGGAL_TUTUP_B2} ${JAM_TUTUP_B2}`).getTime();
 
             const timer = setInterval(function() {
                 const now = new Date().getTime();
                 const distance = targetDate - now;
 
-                // Hitung hari, jam, menit, detik
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Update HTML
                 document.getElementById("days").innerText = days < 10 ? "0" + days : days;
                 document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
                 document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
                 document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
 
-                // Jika waktu habis
                 if (distance < 0) {
                     clearInterval(timer);
-                    document.querySelector(".fixed.top-0").innerHTML = `
+                    document.getElementById("timer-banner").innerHTML = `
                         <div class="container mx-auto text-center py-2">
-                            <span class="font-black text-red-500 uppercase tracking-tighter">⚠️ BATCH 1 TELAH DITUTUP! ⚠️</span>
+                            <span class="font-black text-red-500 animate-pulse uppercase tracking-widest text-sm">⚠️ BATCH 2 TELAH BERAKHIR! ⚠️</span>
                         </div>`;
                 }
             }, 1000);
         }
 
-        startCountdown();
+        initCountdown();
     </script>
 </body>
 </html>
-
