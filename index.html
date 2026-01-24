@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Katalog ID Card & Aksesoris - Batch 2</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
@@ -50,7 +52,7 @@
             
             <div class="p-6 md:p-8 space-y-4">
                 <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 opacity-60 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 bg-slate-200 text-slate-500 text-[9px] px-3 py-1 font-bold rounded-bl-xl">CLOSED</div>
+                    <div class="absolute top-0 right-0 bg-slate-200 text-slate-500 text-[10px] px-4 py-1.5 font-bold rounded-bl-2xl">CLOSED</div>
                     <h4 class="font-bold text-slate-700 text-sm mb-2 flex items-center gap-2">
                         <span class="w-5 h-5 bg-slate-400 text-white rounded-full flex items-center justify-center text-[10px]">1</span>
                         Batch 1
@@ -58,26 +60,29 @@
                     <div class="grid grid-cols-2 gap-y-1 text-[11px] text-slate-600">
                         <p>Order: <b>22-24 Jan</b></p>
                         <p>Validasi: <b>24-25 Jan</b></p>
-                        <p>Proses: <b>-+ 1 Minggu</b></p>
+                        <p>Proses: <b>± 1 Minggu</b></p>
                         <p>Diterima: <b>2/3 Feb</b></p>
                     </div>
                 </div>
 
-                <div class="p-5 rounded-2xl border-2 border-indigo-500 bg-indigo-50 relative shadow-sm">
-                    <div class="absolute top-0 right-0 bg-indigo-600 text-white text-[9px] px-3 py-1 font-bold rounded-bl-xl animate-pulse">ACTIVE NOW</div>
-                    <h4 class="font-bold text-indigo-900 text-sm mb-3 flex items-center gap-2">
-                        <span class="w-5 h-5 bg-indigo-600 text-white rounded-full flex items-center justify-center text-[10px]">2</span>
-                        Batch 2 (Sedang Dibuka)
-                    </h4>
-                    <div class="space-y-2 text-[12px] text-indigo-900">
-                        <div class="grid grid-cols-2 gap-y-1.5">
-                            <p>Order: <b>26-30 Jan</b></p>
-                            <p>Validasi: <b>30-31 Jan</b></p>
-                            <p>Proses: <b>-+ 1 Minggu</b></p>
-                            <p>Diterima: <b class="text-indigo-600 underline">10 Feb</b></p>
-                        </div>
-                    </div>
-                </div>
+                <div class="p-5 rounded-2xl border-2 border-indigo-500 bg-indigo-50 relative overflow-hidden shadow-sm">
+    <div class="absolute top-0 right-0 bg-indigo-600 text-white text-[10px] px-4 py-1.5 font-extrabold rounded-bl-2xl shadow-sm tracking-wider animate-pulse">
+        ACTIVE NOW
+    </div>
+    
+    <h4 class="font-bold text-indigo-900 text-sm mb-3 flex items-center gap-2">
+        <span class="w-5 h-5 bg-indigo-600 text-white rounded-full flex items-center justify-center text-[10px]">2</span>
+        Batch 2 (Sedang Dibuka)
+    </h4>
+    <div class="space-y-2 text-[12px] text-indigo-900">
+        <div class="grid grid-cols-2 gap-y-1.5">
+            <p>Order: <b>26-30 Jan</b></p>
+            <p>Validasi: <b>30-31 Jan</b></p>
+            <p>Proses: <b>± 1 Minggu</b></p>
+            <p>Diterima: <b class="text-indigo-600 underline">10 Feb</b></p>
+        </div>
+    </div>
+</div>
 
                 <div class="bg-amber-50 border border-amber-100 p-4 rounded-2xl">
                     <p class="text-[11px] text-amber-900 leading-relaxed text-center">
@@ -260,11 +265,9 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
     <script>
-        // --- CONFIGURASI BATCH ---
         const TANGGAL_TUTUP_B2 = "January 30, 2026"; 
-        const JAM_TUTUP_B2 = "23:59:59";
+        const JAM_TUTUP_B2 = "12:00:00";
 
-        // Modal Logic
         function closeModal() {
             const modal = document.getElementById('info-modal');
             modal.style.opacity = '0';
@@ -274,7 +277,6 @@
             }, 300);
         }
 
-        // Firebase Setup
         const firebaseConfig = {
             apiKey: "AIzaSyCP45uq14jZysxMNf03DwtJlmjEMZXavY0",
             authDomain: "ukib-b4675.firebaseapp.com",
@@ -292,13 +294,11 @@
             if (element) element.innerText = count.toLocaleString('id-ID');
         });
 
-        // Update visitor count
         visitorRef.transaction((currentValue) => (currentValue || 0) + 1);
 
-        // Timer Logic
         function initCountdown() {
             const targetDate = new Date(`${TANGGAL_TUTUP_B2} ${JAM_TUTUP_B2}`).getTime();
-            document.getElementById("display-deadline").innerText = `${TANGGAL_TUTUP_B2} 23:59`;
+            document.getElementById("display-deadline").innerText = `${TANGGAL_TUTUP_B2} 12:00`;
 
             const timer = setInterval(function() {
                 const now = new Date().getTime();
@@ -329,4 +329,3 @@
     </script>
 </body>
 </html>
-
