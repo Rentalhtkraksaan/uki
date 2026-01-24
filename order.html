@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order ID Card - Professional</title>
+    <title>Order ID Card - Professional Batch 2</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .gradient-bg { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); }
+        .gradient-bg { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
         #modalSuccess { display: none; }
         .fade-in { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn {
@@ -19,9 +19,13 @@
 </head>
 <body class="bg-slate-50 text-slate-800 flex flex-col justify-center min-h-screen">
     <div class="w-full max-w-xl mx-auto py-8 px-4">
-        <header class="gradient-bg text-white py-10 px-4 text-center rounded-t-3xl shadow-lg">
+        <header class="gradient-bg text-white py-10 px-4 text-center rounded-t-3xl shadow-lg relative overflow-hidden">
+            <div class="absolute top-4 right-[-35px] bg-yellow-400 text-indigo-900 text-xs font-bold px-10 py-1 rotate-45 shadow-md">
+                BATCH 2
+            </div>
+            
             <h1 class="text-3xl md:text-4xl font-bold mb-2">Pemesanan ID Card</h1>
-            <p class="opacity-90">Pilih kategori dan paket bundling untuk harga hemat!</p>
+            <p class="opacity-90 italic">Edisi Eksklusif - Batch 2</p>
         </header>
 
         <main class="bg-white p-8 rounded-b-3xl shadow-xl border-x border-b border-slate-100">
@@ -116,18 +120,10 @@
                             <span class="ml-3 text-sm font-bold text-indigo-700 italic">🔥 Bundling 2 ID Card (Rp 12.000)</span>
                         </label>
                     </div>
-                    <div class="bg-amber-100 border-l-4 border-amber-500 p-3 flex gap-2 items-start">
-                        <svg class="h-5 w-5 text-amber-600 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        <p class="text-xs text-amber-800 leading-tight">
-                            <strong>INFO BUNDLING:</strong> Paket bundling berlaku untuk teman dalam kategori/kelas yang sama agar tidak tertukar.
-                        </p>
-                    </div>
                 </div>
 
                 <button type="submit" id="btnKirim" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all transform active:scale-95 flex items-center justify-center gap-2">
-                    KIRIM DATA & DAPATKAN LINK
+                    KIRIM DATA BATCH 2
                 </button>
             </form>
         </main>
@@ -140,9 +136,9 @@
                     <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
             </div>
-            <h2 class="text-2xl font-bold text-slate-800 mb-2">Data Terkirim!</h2>
+            <h2 class="text-2xl font-bold text-slate-800 mb-2">Berhasil Terkirim!</h2>
             <p class="text-slate-600 mb-6 leading-relaxed">
-                Halo <span id="displayNama" class="font-bold text-slate-900"></span>, silakan upload foto kalian ke Drive <span id="displayKelas" class="font-bold text-indigo-600"></span>.
+                Halo <span id="displayNama" class="font-bold text-slate-900"></span>, data Batch 2 sudah kami terima. Silakan upload foto ke Drive <span id="displayKelas" class="font-bold text-indigo-600"></span>.
             </p>
 
             <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-8 text-left rounded-r-xl">
@@ -161,12 +157,16 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getDatabase, ref, push, set } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
+        // Konfigurasi Firebase Batch 2
         const firebaseConfig = {
-            apiKey: "AIzaSyCP45uq14jZysxMNf03DwtJlmjEMZXavY0",
-            authDomain: "ukib-b4675.firebaseapp.com",
-            databaseURL: "https://ukib-b4675-default-rtdb.firebaseio.com",
-            projectId: "ukib-b4675",
-            appId: "1:221524523430:web:2f4fd0c54cfefa5fb1f767"
+            apiKey: "AIzaSyBYApcyKSowCfYILxRUOdLbdBSM1BfcqWw",
+            authDomain: "uki-batch-2.firebaseapp.com",
+            databaseURL: "https://uki-batch-2-default-rtdb.firebaseio.com",
+            projectId: "uki-batch-2",
+            storageBucket: "uki-batch-2.firebasestorage.app",
+            messagingSenderId: "444159529374",
+            appId: "1:444159529374:web:7e2f14385249651c20c68f",
+            measurementId: "G-2YDF4JZNNT"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -179,7 +179,6 @@
         const kelasContainer = document.getElementById('kelasContainer');
         const selectKelas = document.getElementById('kelas');
 
-        // Logika Show/Hide Kelas berdasarkan Kategori
         radioKategori.forEach(input => {
             input.addEventListener('change', (e) => {
                 if (e.target.value === 'Umum') {
@@ -192,7 +191,6 @@
             });
         });
 
-        // Logika Show/Hide Input Nama Teman (Bundling)
         radioInputs.forEach(input => {
             input.addEventListener('change', (e) => {
                 if (e.target.value.includes('Bundling')) {
@@ -207,23 +205,23 @@
         });
 
         const databaseLinkDrive = {
-            "X TSM 1": "https://drive.google.com/drive/folders/1Kmw9jtCBk8FK1e_Ypk3uekVLnWKWRy2C?usp=drive_link",
-            "X TSM 2": "https://drive.google.com/drive/folders/1hltKg5XH92mskjeeVrW6Cy98A1A8M2nT?usp=drive_link",
-            "X TSM 3": "https://drive.google.com/drive/folders/1OSn47Db_05rJoGiDO7wqGvQbMBhlRTwc?usp=drive_link",
-            "X TKR 1": "https://drive.google.com/drive/folders/1RbaFr3YBU5zuSUSPUuxY58sOKO_FGKka?usp=drive_link",
-            "X TKR 2": "https://drive.google.com/drive/folders/17eB6pebDDYerUdjKYiLqHLNPKy_Gq5B6?usp=drive_link",
-            "X TKR 3": "https://drive.google.com/drive/folders/1owECYmHBt2GTwpUyNNi2fXxV3H9fyXfe?usp=drive_link",
-            "X DPIB 1": "https://drive.google.com/drive/folders/1WXtMXVJf90Cbsldx0CO24U5ltWtqlv9P?usp=drive_link",
-            "X DPIB 2": "https://drive.google.com/drive/folders/1M9uLkEqFXM_ojFgBrDN0Hw9q-7Dvusz6?usp=drive_link",
-            "X TEI 1": "https://drive.google.com/drive/folders/18hWzCwSql_s9hP-MYxqzx9AtlCuIe_tS?usp=drive_link",
-            "X TEI 2": "https://drive.google.com/drive/folders/1NEKUYAF3Rhx96GovmQa8_QCX2-ssgSLD?usp=drive_link",
-            "X TEI 3": "https://drive.google.com/drive/folders/1c6vcKsIx-PqFdNEYj_NyUKh8A582QNKG?usp=drive_link",
-            "X TEI 4": "https://drive.google.com/drive/folders/1fJibpT3VkcRXFprVIVe56qj9KkzjoD2F?usp=drive_link",
-            "X RPL 1": "https://drive.google.com/drive/folders/1MShb0VfYk44jnWqPgsnH0tay4P_jdfaU?usp=drive_link",
-            "X RPL 2": "https://drive.google.com/drive/folders/1mZWRi7Rg4w2oNzeUzRHk7XS2VXxyxy00?usp=drive_link",
-            "X RPL 3": "https://drive.google.com/drive/folders/1BIedDbUrJig9ULtFi9xlJ-P7DPyg_CJs?usp=drive_link",
-            "X TPTL": "https://drive.google.com/drive/folders/1wk8b0YJh1-f_2U8Q_ZK1dHEkOgNeqiEX?usp=drive_link",
-            "Umum": "https://drive.google.com/drive/folders/1AdneEh0V65DcD9m0UspG1UUqnwUHdn_P?usp=drive_link"
+            "X TSM 1": "https://drive.google.com/drive/folders/1mKhliBAhR1tc2ircqVof4X-apWVhA5uc",
+            "X TSM 2": "https://drive.google.com/drive/folders/1Ec3zkgHng0mdyD-Mw_ijz0vBakOGzLaq",
+            "X TSM 3": "https://drive.google.com/drive/folders/1Yi3BuQ8orjIKub_0nEJk8bFfqHfiFNDk",
+            "X TKR 1": "https://drive.google.com/drive/folders/11G5SxY2_-8EtfItZyTzdPQWSpQuE9s2P",
+            "X TKR 2": "https://drive.google.com/drive/folders/1XGHsRNxFIeN0GiDRoLyGySQj8tUY7OyK",
+            "X TKR 3": "https://drive.google.com/drive/folders/1WaaG72OitTfvSbtAo7sTpR_QocFQWiap",
+            "X DPIB 1": "https://drive.google.com/drive/folders/1CkYDnZt6_SLKRVHgIGHMzwfZNJYLthtW",
+            "X DPIB 2": "https://drive.google.com/drive/folders/1vTI4GzDfv9kPDUnj52s6bPlokLjTw2cl",
+            "X TEI 1": "https://drive.google.com/drive/folders/1LiF3XfcXGlUYeFHQg0i2CvBV8d1bR7bp",
+            "X TEI 2": "https://drive.google.com/drive/folders/15NgrjUwThSgZTtyMSzZuLddIkKXgTAVY",
+            "X TEI 3": "https://drive.google.com/drive/folders/1QpebsKSznMacUk3Ig8GQj1v6bdOUocf5",
+            "X TEI 4": "https://drive.google.com/drive/folders/1j3ZFh4du3xIFlMRt7uS2P2n0s70EDaa5",
+            "X RPL 1": "https://drive.google.com/drive/folders/13OdJLVDb3RjMBWmFPs_hRj9maZlW_8AY",
+            "X RPL 2": "https://drive.google.com/drive/folders/1b0MvnFCnARByPaf8ILE15_dfVm-LxK4d",
+            "X RPL 3": "https://drive.google.com/drive/folders/1kpAEj0m53-P2rkKAWhwT8HP8iQcUM0y2",
+            "X TPTL": "https://drive.google.com/drive/folders/1jcueOtOMAWQ7rczA-uqFpvPEfw-gCyBC",
+            "Umum": "https://drive.google.com/drive/folders/1K-7kyMuyjnTbcNwtr_fmyYRP0Mcas2AI"
         };
 
         document.getElementById('orderForm').addEventListener('submit', (e) => {
@@ -233,8 +231,6 @@
             const namaUtama = document.getElementById('nama').value;
             const namaTeman = inputNamaBundling.value;
             const noHp = document.getElementById('noHp').value;
-            
-            // Tentukan nilai kelas (Jika umum, tulis "Umum")
             const kelasVal = (kategori === 'Umum') ? "Umum" : selectKelas.value;
 
             if (noHp.length < 10) {
@@ -243,9 +239,9 @@
             }
 
             btn.disabled = true;
-            btn.innerHTML = "Sedang Mengirim...";
+            btn.innerHTML = "Memproses Batch 2...";
 
-            const ordersRef = ref(db, 'orders');
+            const ordersRef = ref(db, 'orders_batch2');
             const namaLengkapDatabase = namaTeman ? `${namaUtama} & ${namaTeman}` : namaUtama;
             const tipeFoto = document.querySelector('input[name="tipeFoto"]:checked').value;
 
@@ -255,6 +251,7 @@
                 no_hp: noHp,
                 kelas: kelasVal,
                 pilihan_foto: tipeFoto,
+                batch: "2",
                 waktu: new Date().toLocaleString('id-ID')
             }).then(() => {
                 document.getElementById('displayNama').innerText = namaUtama;
@@ -269,7 +266,7 @@
             }).catch((error) => {
                 alert("Gagal mengirim data: " + error.message);
                 btn.disabled = false;
-                btn.innerHTML = "KIRIM DATA & DAPATKAN LINK";
+                btn.innerHTML = "KIRIM DATA BATCH 2";
             });
         });
     </script>
