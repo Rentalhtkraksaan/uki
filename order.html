@@ -107,14 +107,20 @@
                     <label class="block text-sm font-semibold mb-3 text-slate-700">Pilih Paket:</label>
                     <div class="grid grid-cols-1 gap-3">
                         <label class="flex items-center p-3 bg-white rounded-lg border hover:border-indigo-500 cursor-pointer transition">
+                            <input type="radio" name="tipeFoto" value="Holder & Yoyo Saja" class="w-4 h-4 text-indigo-600">
+                            <span class="ml-3 text-sm font-medium">Card Holder & Yoyo Saja (Rp 7.000)</span>
+                        </label>
+
+                        <label class="flex items-center p-3 bg-white rounded-lg border hover:border-indigo-500 cursor-pointer transition">
                             <input type="radio" name="tipeFoto" value="Tipe 1" checked class="w-4 h-4 text-indigo-600">
                             <span class="ml-3 text-sm font-medium">ID Card Saja (Rp 7.000)</span>
                         </label>
+
                         <label class="flex items-center p-3 bg-white rounded-lg border hover:border-indigo-500 cursor-pointer transition">
                             <input type="radio" name="tipeFoto" value="Tipe 2" class="w-4 h-4 text-indigo-600">
-                            <span class="ml-3 text-sm font-medium">1 Full Set (Rp 12.000)</span>
+                            <span class="ml-3 text-sm font-medium">1 Full Set <span class="text-[10px] text-slate-400 font-normal">(ID Card + Holder + Yoyo)</span> (Rp 12.000)</span>
                         </label>
-                        
+                            
                         <div class="mt-2 space-y-2">
                             <p class="text-[10px] font-bold text-indigo-500 uppercase px-1">Paket Hemat Bundling (Wajib 1 Kelas):</p>
                             <label class="flex items-center p-3 bg-indigo-50 border-indigo-200 rounded-lg border hover:border-indigo-500 cursor-pointer transition">
@@ -126,7 +132,7 @@
                                 <span class="ml-3 text-sm font-bold text-indigo-700 italic">🔥 Bundling 1 Set + 1 ID Card (Rp 17.000)</span>
                             </label>
                             <label class="flex items-center p-3 bg-indigo-50 border-indigo-200 rounded-lg border hover:border-indigo-500 cursor-pointer transition">
-                                <input type="radio" name="tipeFoto" value="Bundling Mix (12k)" class="w-4 h-4 text-indigo-600">
+                                <input type="radio" name="tipeFoto" value="Bundling 2 ID Card (12k)" class="w-4 h-4 text-indigo-600">
                                 <span class="ml-3 text-sm font-bold text-indigo-700 italic">🔥 Bundling 2 ID Card (Rp 12.000)</span>
                             </label>
                         </div>
@@ -142,17 +148,17 @@
 
     <div id="modalSuccess" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
         <div class="bg-white rounded-3xl max-w-md w-full p-8 text-center shadow-2xl border border-slate-100 transform transition-all">
-            <div class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+            <div id="iconSuccess" class="w-20 h-20 bg-green-50 text-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
             </div>
-            <h2 class="text-2xl font-bold text-slate-800 mb-2">Berhasil Terkirim!</h2>
-            <p class="text-slate-600 mb-6 leading-relaxed">
+            <h2 id="modalTitle" class="text-2xl font-bold text-slate-800 mb-2">Berhasil Terkirim!</h2>
+            <p id="modalDesc" class="text-slate-600 mb-6 leading-relaxed">
                 Halo <span id="displayNama" class="font-bold text-slate-900"></span>, data Batch 2 sudah kami terima. Silakan upload foto ke Drive <span id="displayKelas" class="font-bold text-indigo-600"></span>.
             </p>
 
-            <div class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-8 text-left rounded-r-xl">
+            <div id="formatContainer" class="bg-amber-50 border-l-4 border-amber-400 p-4 mb-8 text-left rounded-r-xl">
                 <p class="text-sm text-amber-800 font-semibold uppercase tracking-wider italic">Format Nama File Foto:</p>
                 <p class="text-sm text-amber-900 mt-2 font-mono bg-amber-200/50 p-2 rounded break-all" id="formatNama">Nama_Lengkap</p>
             </div>
@@ -181,6 +187,9 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+
+        // GANTI NOMOR WHATSAPP ADMIN DI SINI
+        const nomorAdmin = "6281252669990"; 
 
         const bundlingContainer = document.getElementById('bundlingContainer');
         const inputNamaBundling = document.getElementById('namaBundling');
@@ -244,6 +253,7 @@
             const namaTeman = inputNamaBundling.value;
             const noHp = document.getElementById('noHp').value;
             const kelasVal = (kategori === 'Umum') ? "Umum" : selectKelas.value;
+            const tipeFoto = document.querySelector('input[name="tipeFoto"]:checked').value;
 
             if (noHp.length < 10) {
                 alert("Nomor HP tidak valid!");
@@ -255,7 +265,6 @@
 
             const ordersRef = ref(db, 'orders_batch2');
             const namaLengkapDatabase = namaTeman ? `${namaUtama} & ${namaTeman}` : namaUtama;
-            const tipeFoto = document.querySelector('input[name="tipeFoto"]:checked').value;
 
             set(push(ordersRef), {
                 kategori: kategori,
@@ -266,14 +275,37 @@
                 batch: "2",
                 waktu: new Date().toLocaleString('id-ID')
             }).then(() => {
+                const modalTitle = document.getElementById('modalTitle');
+                const modalDesc = document.getElementById('modalDesc');
+                const formatContainer = document.getElementById('formatContainer');
+                const linkDriveBtn = document.getElementById('linkDriveBtn');
+                
                 document.getElementById('displayNama').innerText = namaUtama;
                 document.getElementById('displayKelas').innerText = (kategori === 'Umum') ? "Umum" : kelasVal;
-                
-                let formatFile = namaUtama.replace(/\s+/g, '_');
-                if(namaTeman) formatFile += `_DAN_${namaTeman.replace(/\s+/g, '_')}`;
-                
-                document.getElementById('formatNama').innerText = formatFile;
-                document.getElementById('linkDriveBtn').href = databaseLinkDrive[kelasVal] || "https://drive.google.com";
+
+                // LOGIKA JIKA BELI HOLDER & YOYO SAJA
+                if (tipeFoto === "Holder & Yoyo Saja") {
+                    modalTitle.innerText = "Pesanan Diterima!";
+                    modalDesc.innerHTML = `Halo <b>${namaUtama}</b>, pesanan Holder & Yoyo kamu sudah kami catat. Tidak perlu upload foto ya!`;
+                    formatContainer.classList.add('hidden');
+                    
+                    // Arahkan ke WhatsApp
+                    linkDriveBtn.innerText = "KONFIRMASI VIA WHATSAPP";
+                    linkDriveBtn.classList.replace('bg-indigo-600', 'bg-green-600');
+                    linkDriveBtn.href = `https://wa.me/${nomorAdmin}?text=Halo Lukman, saya sudah memesan Holder %26 Yoyo atas nama ${namaUtama} (${kelasVal})`;
+                } else {
+                    // TAMPILAN NORMAL (CETAK ID CARD)
+                    modalTitle.innerText = "Berhasil Terkirim!";
+                    formatContainer.classList.remove('hidden');
+                    linkDriveBtn.innerText = "UPLOAD KE GOOGLE DRIVE";
+                    linkDriveBtn.classList.replace('bg-green-600', 'bg-indigo-600');
+                    
+                    let formatFile = namaUtama.replace(/\s+/g, '_');
+                    if(namaTeman) formatFile += `_DAN_${namaTeman.replace(/\s+/g, '_')}`;
+                    document.getElementById('formatNama').innerText = formatFile;
+                    linkDriveBtn.href = databaseLinkDrive[kelasVal] || "https://drive.google.com";
+                }
+
                 document.getElementById('modalSuccess').style.display = 'flex';
             }).catch((error) => {
                 alert("Gagal mengirim data: " + error.message);
