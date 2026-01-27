@@ -68,6 +68,9 @@
                     <label class="block text-sm font-semibold mb-2 text-slate-700">Pilih Kelas</label>
                     <select id="kelas" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none bg-white transition" required>
                         <option value="" disabled selected>-- Pilih Kelas --</option>
+                        <optgroup label="KULINER">
+                            <option value="X Kuliner">X Kuliner</option>
+                        </optgroup>
                         <optgroup label="TSM">
                             <option value="X TSM 1">X TSM 1</option>
                             <option value="X TSM 2">X TSM 2</option>
@@ -120,7 +123,7 @@
                             <input type="radio" name="tipeFoto" value="Tipe 2" class="w-4 h-4 text-indigo-600">
                             <span class="ml-3 text-sm font-medium">1 Full Set <span class="text-[10px] text-slate-400 font-normal">(ID Card + Holder + Yoyo)</span> (Rp 12.000)</span>
                         </label>
-                            
+
                         <div class="mt-2 space-y-2">
                             <p class="text-[10px] font-bold text-indigo-500 uppercase px-1">Paket Hemat Bundling (Wajib 1 Kelas):</p>
                             <label class="flex items-center p-3 bg-indigo-50 border-indigo-200 rounded-lg border hover:border-indigo-500 cursor-pointer transition">
@@ -188,7 +191,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        // GANTI NOMOR WHATSAPP ADMIN DI SINI
         const nomorAdmin = "6281252669990"; 
 
         const bundlingContainer = document.getElementById('bundlingContainer');
@@ -224,6 +226,7 @@
         });
 
         const databaseLinkDrive = {
+            "X Kuliner": "https://drive.google.com/drive/folders/14fdl-6-XtEVXBEHQlv6lU7CUS7-iZCIL",
             "X TSM 1": "https://drive.google.com/drive/folders/1mKhliBAhR1tc2ircqVof4X-apWVhA5uc",
             "X TSM 2": "https://drive.google.com/drive/folders/1Ec3zkgHng0mdyD-Mw_ijz0vBakOGzLaq",
             "X TSM 3": "https://drive.google.com/drive/folders/1Yi3BuQ8orjIKub_0nEJk8bFfqHfiFNDk",
@@ -279,27 +282,23 @@
                 const modalDesc = document.getElementById('modalDesc');
                 const formatContainer = document.getElementById('formatContainer');
                 const linkDriveBtn = document.getElementById('linkDriveBtn');
-                
+                                
                 document.getElementById('displayNama').innerText = namaUtama;
                 document.getElementById('displayKelas').innerText = (kategori === 'Umum') ? "Umum" : kelasVal;
 
-                // LOGIKA JIKA BELI HOLDER & YOYO SAJA
                 if (tipeFoto === "Holder & Yoyo Saja") {
                     modalTitle.innerText = "Pesanan Diterima!";
                     modalDesc.innerHTML = `Halo <b>${namaUtama}</b>, pesanan Holder & Yoyo kamu sudah kami catat. Tidak perlu upload foto ya!`;
                     formatContainer.classList.add('hidden');
-                    
-                    // Arahkan ke WhatsApp
                     linkDriveBtn.innerText = "KONFIRMASI VIA WHATSAPP";
                     linkDriveBtn.classList.replace('bg-indigo-600', 'bg-green-600');
                     linkDriveBtn.href = `https://wa.me/${nomorAdmin}?text=Halo Lukman, saya sudah memesan Holder %26 Yoyo atas nama ${namaUtama} (${kelasVal})`;
                 } else {
-                    // TAMPILAN NORMAL (CETAK ID CARD)
                     modalTitle.innerText = "Berhasil Terkirim!";
                     formatContainer.classList.remove('hidden');
                     linkDriveBtn.innerText = "UPLOAD KE GOOGLE DRIVE";
                     linkDriveBtn.classList.replace('bg-green-600', 'bg-indigo-600');
-                    
+                                        
                     let formatFile = namaUtama.replace(/\s+/g, '_');
                     if(namaTeman) formatFile += `_DAN_${namaTeman.replace(/\s+/g, '_')}`;
                     document.getElementById('formatNama').innerText = formatFile;
