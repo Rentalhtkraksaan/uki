@@ -295,8 +295,8 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
     <script>
-        const TANGGAL_TUTUP_B2 = "January 29, 2026"; 
-        const JAM_TUTUP_B2 = "21:00:00";
+        const TANGGAL_TUTUP_B2 = "January 30, 2026"; 
+        const JAM_TUTUP_B2 = "15:00:00";
 
         function closeModal() {
             const modal = document.getElementById('info-modal');
@@ -328,7 +328,7 @@
 
         function initCountdown() {
             const targetDate = new Date(`${TANGGAL_TUTUP_B2} ${JAM_TUTUP_B2}`).getTime();
-            document.getElementById("display-deadline").innerText = `${TANGGAL_TUTUP_B2} 21:00`;
+            document.getElementById("display-deadline").innerText = `${TANGGAL_TUTUP_B2} 15:00`;
 
             const timer = setInterval(function() {
                 const now = new Date().getTime();
@@ -359,5 +359,6 @@
     </script>
 </body>
 </html>
+
 
 
